@@ -1,0 +1,20 @@
+Big O notaion
+Performance of Arrays and objects
+Problem solving approch
+Problem solving pattern
+Recursion
+searching algorithms - binary
+sorting algorithms - bubble, selection, insertion, merge, quick, radix
+
+Singly linked list
+Doubly linked list
+stacks and Q
+binary search tress
+tree reversal
+binary heaps
+hash tables
+graphs
+graph traversal
+Dijkstra's algorithms
+
+
