@@ -146,3 +146,17 @@ constructor function always have an object which points to Object.prototype but 
 so we have constructor function and the objects cteated with new keyword
 object's prototype is  found by Object.getPrototypeOf() -- pointing to Object.prototype
 constructors prototype is ponint to Function.prototype
+
+
+Class is the key word in side it we can have constructor to give the objects special values
+and all other functions will be shared as if they are bound to their prototype
+
+A object can be created with no prototype with Object.create(null)
+
+Object.keys(obj) -- gives all keys without prototypes keys
+key in Obj -- checks prototype and body also
+hasOwnProperty checks only body not the prototype
+
+
+Symbol
+----------------
