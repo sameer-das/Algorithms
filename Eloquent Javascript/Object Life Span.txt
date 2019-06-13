@@ -108,4 +108,41 @@ obj1 = {} ----- poitns to Object.prototype
 obj2 = {age:25, name:"Amit"} ----- poitns to Object.prototype
 let customPrototype = {myFunction(){console.log("inside myFunction")}} ----- poitns to Object.prototype
 obj3 = Object.create(customePrototype) ----- Object.prototype = customPrototype and customPrototype  inside points to Object.prototype
-If a object is created 
+
+Classes--------------------
+Prototypes - useful for defining properties for which all instances of a class share the same value, such as methods. 
+Properties - that differ per instance, need to be stored directly in the objects themselves.
+
+So when object is created 
+	- Decide from where(prototype) it should be dereived -- by Object.create(prototype)
+	- Decide the properties that instances of this class are supposed to have
+
+Like this - 
+function makeRabbit(type) {
+  let rabbit = Object.create(protoRabbit);
+  rabbit.type = type;
+  return rabbit;
+}
+
+
+If you put a key word 'new' to a function call the function becomes constructor
+	- This means that an object with the right prototype is automatically created
+	- bound to this in the function, 
+	- And returned at the end of the function.
+By this which prototype object it should be derived is decided by the prototype property of the constructor function
+
+Like this -
+function Rabbit(type) {
+  this.type = type;
+}
+Rabbit.prototype.speak = function(line) {
+  console.log(`The ${this.type} rabbit says '${line}'`);
+};
+
+let weirdRabbit = new Rabbit("weird");
+
+constructor function always have an object which points to Object.prototype but we can override by our own prototype object like above
+
+so we have constructor function and the objects cteated with new keyword
+object's prototype is  found by Object.getPrototypeOf() -- pointing to Object.prototype
+constructors prototype is ponint to Function.prototype
