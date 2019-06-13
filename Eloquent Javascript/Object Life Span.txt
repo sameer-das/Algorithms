@@ -1,0 +1,111 @@
+Object has 2 things - property and methods
+methods are properties which hold function values
+
+Usually a method does something with the object it was called on
+When a function is called as a method(related to Object) the binding called 'this' automatically points 
+at the object it was called on
+
+You can think of this as an extra parameter that is passed in a different way. 
+If you want to pass it explicitly, you can use a function’s 'call' method, 
+which takes the 'this' value as its first argument and treats further arguments as normal parameters.
+
+speak.call(hungryRabbit, "Burp!");
+
+Since each function has its own 'this' binding whose value depends on the way it is called
+you cannot refer to the this of the wrapping scope in a regular function defined with the function keyword.
+
+Arrow functions are different—they do not bind their own this but can see the this binding of the scope around them
+
+// in the below function normalize, inner function inside map as it is a arrow function it does not bind to it's own 'this'
+ but binds to the outside encloseing block's 'this',  that is the 'this' of the normalize function
+function normalize() {
+  console.log(this.coords.map(n => n / this.length));
+}
+normalize.call({coords: [0, 2, 3], length: 5});
+// ? [0, 0.4, 0.6]
+
+// in the below function normalize2, inner function inside map is a normal function with function keyword so it does bind to it's own 'this'
+hence we get undefined
+
+function normalize2() {
+console.log(this.coords.map(function(n){
+  return (n/this.length);}))
+
+}
+normalize2.call({coords:[0,2,3], length: 5});
+
+
+Similarly 
+
+let user = {
+   
+ name: "GFG", 
+    
+gfg1:() => { 
+        
+console.log("hello " + this.name); // no 'this' binding here
+    
+}, 
+    
+gfg2(){        
+        
+console.log("Welcome to " + this.name); // 'this' binding works here
+    
+}   
+
+}
+user.gfg1() // hello undefined 
+user.gfg2() // welcome to GFG
+
+31189118836
+9631
+
+
+
+PROTOTYPE - 
+
+When an object gets a request for a property that it does not have, 
+its prototype will be searched for the property, 
+then the prototype’s prototype, and so on.
+
+let empty = {}
+empty.toString // fundtion
+empty.toString() // object object
+
+So who is the prototype of the empty object - 
+It is the great ancestral prototype, the entity behind almost all objects, Object.prototype.
+
+Object.getPrototypeOf() - methods gives the prototype of an object
+
+
+The prototype relations of JavaScript objects form a tree-shaped structure, 
+and at the root of this structure sits Object.prototype. 
+It provides a few methods that show up in all objects, 
+such as toString, which converts an object to a string representation.
+
+Similarly  Functions derive from Function.prototype, and arrays derive from Array.prototype.
+Object.getPrototypeOf(Math.max) 
+
+Object.create() - is used to create a object with different prototype
+
+let protoRabbit = {
+  speak(line) {
+    console.log(`The ${this.type} rabbit says '${line}'`);
+  }
+};
+let killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = "killer";
+killerRabbit.speak("SKREEEE!");
+// ? The killer rabbit says 'SKREEEE!'
+
+
+protoRabbit acts as a container for the properties that are shared by all rabbits
+An individual rabbit object, like the killerRabbit,
+contains properties that apply only to itself—in this case its type—and derives shared properties from its prototype
+
+
+obj1 = {} ----- poitns to Object.prototype
+obj2 = {age:25, name:"Amit"} ----- poitns to Object.prototype
+let customPrototype = {myFunction(){console.log("inside myFunction")}} ----- poitns to Object.prototype
+obj3 = Object.create(customePrototype) ----- Object.prototype = customPrototype and customPrototype  inside points to Object.prototype
+If a object is created 

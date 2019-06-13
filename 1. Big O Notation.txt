@@ -1,0 +1,105 @@
+its important to have a common vocabulary to talk about how our code performs
+useful for discussing trade-offs between different approaches
+when u debug your code identifying parts of the codes that are inefficient can help us find pain points in our app
+
+
+example - a function that adds up the numbers from 1 to n
+
+method 1 
+function addUpTo(n) {
+    let total = 0;
+    for(let i = 1; i <= n; i++){
+        total+=i;
+    }
+    return total;
+}
+
+method 2
+function addUpTo(n) {
+    return (n * (n + 1))/2;
+}
+
+var t3 = performance.now();
+addUpTo(1000000000);
+var t4 = performance.now();
+console.log(`The time taken is ${t4 - t3}`);
+
+
+which is better, what is actually mean by better
+
+faster 
+less memory intenive
+more readable
+
+So different machine recrods differemt times as per the processing speed
+The same machine may record diff times at diff times
+for fast algorithms speed measurements may not precise enough
+
+so count the number of single operations the computer take to perform
+
+return (n * (n + 1))/2; [1 add, 1 mult, 1 div]
+
+in first case the number of operations depend on the n
+if n is 7 its 7 
+if n is 10000 its 10000
+    for(let i = 1; i <= n; i++){
+        total+=i;
+    }
+
+so n additions, n assignments in for body
+i++ is also having n additions and n assignments
+1 assignment at total = 0
+let i = 0 also another assignments
+n comparision
+
+the no of counting should be as high as 5n+2 or as low as 2n
+
+BIG O - it allows us to talk formally about how the runtime of an algorithm grows as the input grows
+
+we say that an algorithm is O(f(n)) if the number of simple operations the computer has to do is eventually less than a constant times f(n), as n increases
+linear - f(n) = n
+quadratic f(n) = n^2
+constant f(n) = 1
+f(n) could be different
+
+
+so for second - the number of operation is 3 so O(1)
+in first the number of operarion increases as n increases so O(n)
+
+constants don't matter
+O(2n) -- O(n)
+O(500) -- O(1)
+O(13n^2) -- O(n^2)
+
+Smaller dont matter
+O(n+10) -- O(n)
+O(1000n+500) -- O(n)
+O(n^2 + n + 500) -- O(n)
+
+
+arithmatic operations are constant
+variable assignment is also constant
+accessing elements from array using index and items from object using key is constant
+in a loop the complexity is the length of the loop times the complexity of what every happens inside the loop
+
+
+Space complexity ---------
+
+how much memory we do allocate in order to run the algorithm
+
+axuiliary space complexity - space required by the algorith, not including the space taken by the input
+unless otherwise noted, when we talk about space complexity, technically we will talk about auxiliary space complexity 
+
+
+Most premetives (boolean, number, undefined, null) are constant space
+strings require O(n) as the n = length 
+reference (array and object) - O(n) where n is the length of the array or the number of keys in object
+
+
+
+
+
+
+
+
+
